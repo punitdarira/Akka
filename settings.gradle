@@ -11,5 +11,5 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.4.0'
 }
 
-rootProject.name = 'AkkaDemo1'
+rootProject.name = 'AkkaDemo'
 include('app')

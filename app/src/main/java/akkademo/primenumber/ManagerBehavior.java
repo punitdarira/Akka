@@ -26,7 +26,15 @@ public class ManagerBehavior extends AbstractBehavior<ManagerBehavior.Command>{
 		
 		return newReceiveBuilder()
 				.onMessage(InstructionCommand.class, cmd->{
-					actorSystem.tell(new WorkerBehavior.Command("generate", getContext().getSelf()));
+					try{
+						//ActorSystem<WorkerBehavior.Command> actorSystem =ActorSystem.create(WorkerBehavior.create(),"WorkerActor"+(int)randDouble(1, 1000));
+
+						actorSystem.tell(new WorkerBehavior.Command("generate", getContext().getSelf()));
+					}
+					catch (Exception ex){
+						ex.printStackTrace();
+					}
+
 					return this;
 				})
 				.onMessage(WorkerResponseCommand.class, cmd->{
@@ -64,6 +72,12 @@ public class ManagerBehavior extends AbstractBehavior<ManagerBehavior.Command>{
 		}
 		
 	}
-	
+	public double randDouble(double bound1, double bound2) {
+		//make sure bound2> bound1
+		double min = Math.min(bound1, bound2);
+		double max = Math.max(bound1, bound2);
+		//math.random gives random number from 0 to 1
+		return min + (Math.random() * (max - min));
+	}
 
 }

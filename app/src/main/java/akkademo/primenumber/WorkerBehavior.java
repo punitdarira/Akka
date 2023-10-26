@@ -1,6 +1,7 @@
 package akkademo.primenumber;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Random;
 
 import akka.actor.typed.ActorRef;
@@ -25,6 +26,7 @@ public class WorkerBehavior extends AbstractBehavior<WorkerBehavior.Command>{
 		// TODO Auto-generated method stub
 		return newReceiveBuilder()
 				.onMessage(WorkerBehavior.Command.class, cmd->{
+					System.out.println(Thread.currentThread().getId() + " " + Thread.currentThread().getName());
 					System.out.println(BigInteger.probablePrime(2000, new Random()));
 					return this;
 				}).build();
@@ -55,6 +57,11 @@ public class WorkerBehavior extends AbstractBehavior<WorkerBehavior.Command>{
 		}
 		
 		
+	}
+	private void test(List<Runnable> test){
+		for(Runnable task : test){
+			//task
+		}
 	}
 
 }
